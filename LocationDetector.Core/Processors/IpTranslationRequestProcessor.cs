@@ -1,4 +1,5 @@
-﻿using LocationDetector.Core.Interfaces;
+﻿using LocationDetector.Core.Helpers;
+using LocationDetector.Core.Interfaces;
 using LocationDetector.Core.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -8,14 +9,16 @@ namespace LocationDetector.Core.Processors
     {
         public List<IpTranslationResponse> IpTranslation(IFormFile file)
         {
+
+            List<IpTranslationRequest> ipTranslationRequests;
+
             if (file.FileName.EndsWith(".csv"))
             {
-                using var reader = new StreamReader(file.OpenReadStream());
-                var conteudo = reader.ReadToEndAsync();
+                ipTranslationRequests = FilesHelper.ReadCsvFile<IpTranslationRequest>(file);
             }
             else
             {
-                
+                ipTranslationRequests = FilesHelper.ReadJsonlFile<IpTranslationRequest>(file);
             }
 
             return null;

@@ -49,10 +49,9 @@ namespace LocationDetector.Core.Helpers
             }
         }
 
-        public static List<T> ReadJsonl<T>(byte[] jsonData)
+        public static List<T> ReadJsonlFile<T>(IFormFile file)
         {
-            using (var memoryStream = new MemoryStream(jsonData))
-            using (var reader = new StreamReader(memoryStream))
+            using (var reader = new StreamReader(file.OpenReadStream()))
             {
                 var objects = new List<T>();
                 string line;
