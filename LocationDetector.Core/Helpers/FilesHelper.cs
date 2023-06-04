@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System.Formats.Asn1;
 using System.Globalization;
 
@@ -41,6 +42,39 @@ namespace LocationDetector.Core.Helpers
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteRecords(objects);
+                writer.Flush();
+                memoryStream.Position = 0;
+
+                return memoryStream.ToArray();
+            }
+        }
+
+        public static List<T> ReadJsonl<T>(byte[] jsonData)
+        {
+            using (var memoryStream = new MemoryStream(jsonData))
+            using (var reader = new StreamReader(memoryStream))
+            {
+                var objects = new List<T>();
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var obj = JsonConvert.DeserializeObject<T>(line);
+                    objects.Add(obj);
+                }
+                return objects;
+            }
+        }
+
+        public static byte[] GenerateJsonl<T>(List<T> objects)
+        {
+            using (var memoryStream = new MemoryStream())
+            using (var writer = new StreamWriter(memoryStream))
+            {
+                foreach (var obj in objects)
+                {
+                    var jsonLine = JsonConvert.SerializeObject(obj);
+                    writer.WriteLine(jsonLine);
+                }
                 writer.Flush();
                 memoryStream.Position = 0;
 
