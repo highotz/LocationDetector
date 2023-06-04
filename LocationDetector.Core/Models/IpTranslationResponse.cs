@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocationDetector.Core.Models
 {
-    internal class IpTranslationResponse : IpTranslationRequest
+    public class IpTranslationResponse : IpTranslationRequest
     {
         public double latitude { get; set; }
         public double longitude { get; set; }
