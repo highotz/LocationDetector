@@ -23,4 +23,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Fixtures\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocationDetector.API\LocationDetector.API.csproj" />
+  </ItemGroup>
+
 </Project>

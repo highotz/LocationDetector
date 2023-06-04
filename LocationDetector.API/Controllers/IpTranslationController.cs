@@ -6,15 +6,13 @@ namespace LocationDetector.API.Controllers;
 [Route("[controller]")]
 public class IpTranslationController : ControllerBase
 {
-    private readonly ILogger<IpTranslationController> _logger;
 
-    public IpTranslationController(ILogger<IpTranslationController> logger)
+    public IpTranslationController()
     {
-        _logger = logger;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> ProcessIps()
+    [HttpPost(Name = "UploadClientIpListFile")]
+    public async Task<IActionResult> Post()
     {
         // Check if a file was sent in the request
         if (Request.Form.Files.Count == 0)
