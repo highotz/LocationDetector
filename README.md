@@ -1,6 +1,6 @@
 # LocationDetector
 
-This project is my solution to the technical challenge for the backend developer opportunity for Croct, is a standalone application that translates IP addresses from a stream of events into geographical locations. It reads input events, translates the IP addresses to location information, and writes the processed events to an output stream. The application is built using .NET Core 7 and follows the specified requirements.
+This project is my solution to the technical challenge for the backend developer opportunity at [Croct](https://www.linkedin.com/company/croct/), is a standalone application that translates IP addresses from a stream of events into geographical locations. It reads input events, translates the IP addresses to location information, and writes the processed events to an output stream. The application is built using .NET Core 7 and follows the specified requirements.
 
 ## Requirements
 
