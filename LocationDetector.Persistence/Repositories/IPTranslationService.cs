@@ -2,7 +2,6 @@
 using LocationDetector.Core.Models;
 using LocationDetector.Domain.Interfaces;
 using LocationDetector.Domain.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace LocationDetector.Persistence.Repositories
 {

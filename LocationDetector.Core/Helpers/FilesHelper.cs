@@ -1,8 +1,6 @@
 ﻿using CsvHelper;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LocationDetector.Core.Helpers
 {
