@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LocationDetector.Core\LocationDetector.Core.csproj" />
+    <ProjectReference Include="..\LocationDetector.Persistence\LocationDetector.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

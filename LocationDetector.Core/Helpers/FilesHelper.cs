@@ -1,7 +1,6 @@
 ﻿using CsvHelper;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Formats.Asn1;
 using System.Globalization;
 
 namespace LocationDetector.Core.Helpers
@@ -9,10 +8,9 @@ namespace LocationDetector.Core.Helpers
     public class FilesHelper
     {
 
-        public static List<T> ReadCsvFile<T>(IFormFile file)
+        public static List<T> ReadCsvFile<T>(StreamReader reader)
         {
-            using var reader = new StreamReader(file.OpenReadStream());
-            var lines = reader.ReadToEnd().Split(Environment.NewLine);
+            var lines = reader.ReadToEnd().Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None);
 
             var objects = new List<T>();
 
@@ -49,9 +47,9 @@ namespace LocationDetector.Core.Helpers
             }
         }
 
-        public static List<T> ReadJsonlFile<T>(IFormFile file)
+        public static List<T> ReadJsonlFile<T>(StreamReader reader)
         {
-            using (var reader = new StreamReader(file.OpenReadStream()))
+            using (reader)
             {
                 var objects = new List<T>();
                 string line;

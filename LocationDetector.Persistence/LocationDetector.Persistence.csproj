@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocationDetector.Core\LocationDetector.Core.csproj" />
+    <ProjectReference Include="..\LocationDetector.Domain\LocationDetector.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataFiles\IPs.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

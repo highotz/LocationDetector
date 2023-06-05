@@ -1,7 +1,7 @@
 ﻿using LocationDetector.Core.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace LocationDetector.Core.Interfaces
+namespace LocationDetector.Domain.Interfaces
 {
     public interface IIpTranslationRequestProcessor
     {

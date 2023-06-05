@@ -1,8 +1,5 @@
-using LocationDetector.Core.Interfaces;
-using LocationDetector.Core.Models;
+using LocationDetector.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace LocationDetector.API.Controllers;
 
@@ -15,9 +12,10 @@ public class IpTranslationController : ControllerBase
     private readonly IConfiguration _configuration;
     private IIpTranslationRequestProcessor _ipTranslationProcessor;
 
-    public IpTranslationController(IConfiguration configuration)
+    public IpTranslationController(IConfiguration configuration, IIpTranslationRequestProcessor ipTranslationRequestProcessor)
     {
         _configuration = configuration;
+        _ipTranslationProcessor = ipTranslationRequestProcessor;
         _uploadFileType = _configuration.GetValue<string>("TranslationControllerConfiguration:Upload").ToLower();
         _responseFileType = _configuration.GetValue<string>("TranslationControllerConfiguration:Response").ToLower();
     }
