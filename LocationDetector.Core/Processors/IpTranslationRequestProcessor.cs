@@ -23,15 +23,18 @@ namespace LocationDetector.Core.Processors
             {
                 using var reader = new StreamReader(file.OpenReadStream());
                 ipTranslationRequests = FilesHelper.ReadCsvFile<IpTranslationRequest>(reader);
+                ipTranslationRequests.RemoveAll(x => x.ip == "");
                 ipTranslationResponses = _ipTranslationService.IpTranslate(ipTranslationRequests);
             }
             else
             {
                 using var reader = new StreamReader(file.OpenReadStream());
                 ipTranslationRequests = FilesHelper.ReadJsonlFile<IpTranslationRequest>(reader);
+                ipTranslationRequests.RemoveAll(x => x.ip == "");
+                ipTranslationResponses = _ipTranslationService.IpTranslate(ipTranslationRequests);
             }
 
-            return null;
+            return ipTranslationResponses;
         }
     }
 }

@@ -1,5 +1,8 @@
+using LocationDetector.Core.Helpers;
 using LocationDetector.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Net.Mime;
 
 namespace LocationDetector.API.Controllers;
 
@@ -30,10 +33,31 @@ public class IpTranslationController : ControllerBase
                 try
                 {
                     _ipTranslationProcessor.IpTranslation(file);
+
+                    byte[] fileBytes;
+                    string contentType;
+
+
+                    if (_responseFileType == "csv")
+                    {
+                        fileBytes = FilesHelper.GenerateCsv(_ipTranslationProcessor.IpTranslation(file));
+                        contentType = "text/csv";
+                    }
+                    else
+                    {
+                        fileBytes = FilesHelper.GenerateJsonl(_ipTranslationProcessor.IpTranslation(file));
+                        contentType = "application/x-jsonlines";
+                    }
+
+                    return new FileContentResult(fileBytes, contentType)
+                    {
+                        FileDownloadName = $"ipLocations.{_responseFileType}"
+                    };
+
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(ex.Message);
+                    return StatusCode(500, $"An error occurred while returning the file: {ex.Message}");
                 }
             }
             else

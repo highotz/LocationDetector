@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LocationDetector.Core.Helpers
 {
@@ -16,18 +17,21 @@ namespace LocationDetector.Core.Helpers
 
             for (int i = 1; i < lines.Length; i++)
             {
-                var values = lines[i].Split(',');
+                if (!String.IsNullOrEmpty(lines[i]))
+                {
+                    var values = lines[i].Split(',');
 
-                var obj = Activator.CreateInstance<T>();
+                    var obj = Activator.CreateInstance<T>();
 
-                typeof(T)
-                    .GetProperties()
-                    .Where(p => p.CanWrite)
-                    .Select((p, index) => new { Property = p, Index = index })
-                    .ToList()
-                    .ForEach(p => p.Property.SetValue(obj, Convert.ChangeType(values[p.Index], p.Property.PropertyType)));
+                    typeof(T)
+                        .GetProperties()
+                        .Where(p => p.CanWrite)
+                        .Select((p, index) => new { Property = p, Index = index })
+                        .ToList()
+                        .ForEach(p => p.Property.SetValue(obj, Convert.ChangeType(values[p.Index], p.Property.PropertyType)));
 
-                objects.Add(obj);
+                    objects.Add(obj);
+                }
             }
 
             return objects;
