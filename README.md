@@ -16,7 +16,7 @@ This project is my solution to the technical challenge for the backend developer
 
 2. Install the .NET Core 6 SDK (if not already installed). Refer to the official documentation for instructions: [Download .NET Core 7 SDK](https://dotnet.microsoft.com/pt-br/download)
 
-3. Configure the application, update the configuration file or command-line arguments to specify the desired input stream reader(CSV or JSONL), IP-to-location translator(CSV or API), and output stream writer(CSV or JSONL).
+3. Configure the application, update the configuration file to specify the desired input stream reader Upload:(CSV or JSONL), TranslationChannel(CSV or API), and output stream writer Response(CSV or JSONL).
 
 3. Build the application:
    ```shell
@@ -24,5 +24,5 @@ This project is my solution to the technical challenge for the backend developer
 
 4. Run the application:
    ```shell
-   dotnet run --configuration Release
+   dotnet run --configuration Debug --project LocationDetector.API/LocationDetector.API.csproj
 
